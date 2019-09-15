@@ -1,12 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.6.1" />
-    <PackageReference Include="Humanizer.Core" Version="2.7.2" />
-  </ItemGroup>
-
+  <Import Project="..\.paket\Paket.targets" />
+  <Import Project="..\.paket\Paket.Restore.targets" />  
 </Project>

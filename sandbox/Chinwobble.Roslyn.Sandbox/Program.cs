@@ -7,14 +7,12 @@ namespace Chinwobble.Roslyn.Sandbox
     [GenerateNotifyPropertyChanged]
     public partial class Program : BindableObject
     {
-        private string _test;
-        private Program a, b;
-        private string _d, c;
+        private string _title;
+        private string _name;
+        
         public Program()
         {
-            var result = this.Test;
-            // this.Test
-            // this.Id;
+            var result = this.Name;
         }
         static void Main(string[] args)
         {

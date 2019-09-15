@@ -1,4 +1,5 @@
 ﻿using CodeGeneration.Roslyn;
+using Humanizer;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Humanizer;
 
 namespace Chinwobble.Roslyn.PropertyChanged.NotifyPropertyChanged
 {
@@ -15,14 +15,13 @@ namespace Chinwobble.Roslyn.PropertyChanged.NotifyPropertyChanged
     {
         public PropertyChangedGenerator(AttributeData attributeData)
         {
-
         }
 
         public Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(TransformationContext context, IProgress<Diagnostic> progress, CancellationToken cancellationToken)
         {
             var partialType = CreatePartialType();
             return Task.FromResult(SyntaxFactory.List(partialType));
-
+            
             IEnumerable<MemberDeclarationSyntax> CreatePartialType()
             {
                 if (context.ProcessingNode is ClassDeclarationSyntax classDeclaration)

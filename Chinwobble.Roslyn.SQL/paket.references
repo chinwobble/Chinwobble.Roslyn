@@ -1,0 +1,7 @@
+System.Configuration.ConfigurationManager
+System.Runtime.Caching
+Microsoft.SqlServer.TransactSql.ScriptDom
+Microsoft.SqlServer.Types
+System.Data.SqlClient
+CodeGeneration.Roslyn
+FSharp.Core

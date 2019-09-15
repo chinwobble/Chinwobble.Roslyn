@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.PropertyC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.Sandbox", "sandbox\Chinwobble.Roslyn.Sandbox\Chinwobble.Roslyn.Sandbox.csproj", "{3E3AE653-8E19-4E99-AE33-B208947F76FA}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Chinwobble.Roslyn.SQL", "Chinwobble.Roslyn.SQL\Chinwobble.Roslyn.SQL.fsproj", "{2BEB9A45-F3F3-4178-AD1D-F2DA992EF94B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BEB9A45-F3F3-4178-AD1D-F2DA992EF94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEB9A45-F3F3-4178-AD1D-F2DA992EF94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEB9A45-F3F3-4178-AD1D-F2DA992EF94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEB9A45-F3F3-4178-AD1D-F2DA992EF94B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

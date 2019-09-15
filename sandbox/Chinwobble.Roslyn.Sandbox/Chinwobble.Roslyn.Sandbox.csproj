@@ -2,28 +2,32 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ChartControl.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.6.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <DotNetCliToolReference Include="dotnet-codegen" Version="0.6.1" />
 
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Chinwobble.Roslyn.PropertyChanged\Chinwobble.Roslyn.PropertyChanged.csproj" />
+    <None Include="ChartControl.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Windows" />
-    <Reference Include="WindowsBase" />
+    <ProjectReference Include="..\..\Chinwobble.Roslyn.PropertyChanged\Chinwobble.Roslyn.PropertyChanged.csproj" />
+    <ProjectReference Include="..\..\Chinwobble.Roslyn.SQL\Chinwobble.Roslyn.SQL.fsproj" />
   </ItemGroup>
 
 </Project>

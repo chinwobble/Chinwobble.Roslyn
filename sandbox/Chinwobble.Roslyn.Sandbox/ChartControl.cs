@@ -10,8 +10,7 @@ namespace Chinwobble.Roslyn.Sandbox
             DependencyProperty.Register(
                 name: "YScalePrecision",
                 propertyType: typeof(int),
-                ownerType: typeof(ChartControl),
-                typeMetadata: new PropertyMetadata(defaultValue: 2));
+                ownerType: typeof(ChartControl));
 
         public static readonly DependencyProperty XScalePrecisionProperty =
             DependencyProperty.Register(

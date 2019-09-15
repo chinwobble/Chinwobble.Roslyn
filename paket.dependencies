@@ -1,0 +1,11 @@
+source https://www.nuget.org/api/v2/
+
+nuget CodeGeneration.Roslyn
+nuget FSharp.Core
+nuget Humanizer.Core
+nuget Microsoft.data.sqlclient
+nuget Microsoft.SqlServer.TransactSql.ScriptDom
+nuget Microsoft.SqlServer.Types
+nuget System.Configuration.ConfigurationManager
+nuget system.data.sqlclient
+nuget System.Runtime.Caching

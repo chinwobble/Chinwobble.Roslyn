@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="paket.references" />
+    <None Include="Scripts\Script1.fsx" />
+    <Compile Include="SqlClient\Extensions.fs" />
+    <Compile Include="SqlClient\Shared.fs" />
+    <Compile Include="SqlClient\Configuration.fs" />
+    <Compile Include="SqlClient\DataTable.fs" />
+    <Compile Include="SqlClient\DynamicRecord.fs" />
+    <Compile Include="SqlClient\ISqlCommand.fs" />
+    <Compile Include="SqlClient\Runtime.fs" />
+    <Compile Include="SqlClientExtensions.fs" />
+    <Compile Include="DesignTimeConnectionString.fs" />
+    <None Include="ProviderImplementation.fs" />
+    <Compile Include="DesignTime.fs" />
+    <None Include="SingleRootTypeProvider.fs" />
+    <None Include="SqlClientProvider.fs" />
+    <None Include="SqlCommandProvider.fs" />
+    <Compile Include="Generators.fs" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>
