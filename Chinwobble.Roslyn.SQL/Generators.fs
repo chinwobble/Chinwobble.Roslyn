@@ -39,16 +39,25 @@ type GenerateSqlAttribute =
 and internal SqlGenerator =
     val ConnectionString: string
     val Statement: string
-    new(attrib: AttributeData) =  
-        let x = ""
-        { 
-          ConnectionString = attrib.ConstructorArguments.[0].Value.ToString()
-          Statement = attrib.ConstructorArguments.[1].Value.ToString()
-        }
+    new(attrib: AttributeData) =
+        if attrib.ConstructorArguments.Length <> 2
+        then
+            {
+              ConnectionString = String.Empty
+              Statement = String.Empty
+            }
+        else
+            { 
+              ConnectionString = attrib.ConstructorArguments.[0].Value.ToString()
+              Statement = attrib.ConstructorArguments.[1].Value.ToString()
+            }
         
     interface CodeGeneration.Roslyn.ICodeGenerator with
         member this.GenerateAsync(context: TransformationContext, progress: System.IProgress<Diagnostic>, cancellationToken: CancellationToken): Task<SyntaxList<CSharp.Syntax.MemberDeclarationSyntax>> = 
-            
+            if this.ConnectionString = String.Empty || this.Statement = String.Empty 
+            then
+                Task.FromResult(SyntaxFactory.List<MemberDeclarationSyntax>())
+            else 
             let a = new Microsoft.CodeAnalysis.DiagnosticDescriptor("SQL1", "test", "{0} connection: {1}", "SQL", DiagnosticSeverity.Warning, true, "", "", System.Array.Empty<string>())
 
             progress.Report(Diagnostic.Create(a, context.ProcessingNode.GetLocation(), "connecting", this.ConnectionString))
@@ -82,7 +91,7 @@ and internal SqlGenerator =
                         parameters
                         |> List.map (fun x -> {| paramName = x.Name; TypeName = x.TypeInfo.ClrTypeFullName |})
                         |> fun methodParams -> 
-                            let methodSig = sprintf "public async Task<%s.Result> Execute(%s)" classDec.Identifier.ValueText (System.String.Join(",", methodParams.Select(fun x -> sprintf "%s %s" x.TypeName x.paramName)))
+                            let methodSig = sprintf "public async Task<System.Collections.Generic.IEnumerable<%s.Result>> Execute(%s)" classDec.Identifier.ValueText (System.String.Join(",", methodParams.Select(fun x -> sprintf "%s %s" x.TypeName x.paramName)))
                             let addParamsStr = 
                                 methodParams 
                                 |> List.map (fun methodParam -> (sprintf "parameters.Add(nameof(%s), %s);" methodParam.paramName methodParam.paramName))
@@ -94,10 +103,10 @@ and internal SqlGenerator =
                                     {
                                         var parameters = new Dapper.DynamicParameters();
                                         %s
-                                        return await Dapper.SqlMapper.QueryAsync<%s.Result>(db, %s, parameters);
+                                        return await Dapper.SqlMapper.QueryAsync<%s.Result>(db, @"%s", parameters);
                                     }
                                 }
-                                """ methodSig addParamsStr classDec.Identifier.ValueText "sqltext"
+                                """ methodSig addParamsStr classDec.Identifier.ValueText this.Statement
 
                     [|resultClassDefinition; constructor; connStrProperty; executeMethod|]
                     |> Array.map SyntaxFactory.ParseMemberDeclaration

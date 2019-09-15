@@ -8,9 +8,7 @@ open System.Data.SqlClient
 open FSharp.Data.SqlClient
 open System.Linq
 
-
-// [<CompilerMessageAttribute("This API supports the FSharp.Data.SqlClient infrastructure and is not intended to be used directly from your code.", 101, IsHidden = true)>]
-type ISqlCommand = 
+type internal ISqlCommand = 
     
     abstract Execute: parameters: (string * obj)[] -> obj
     abstract AsyncExecute: parameters: (string * obj)[] -> obj
@@ -21,7 +19,7 @@ type ISqlCommand =
 
     abstract Raw: SqlCommand with get
 
-module Seq = 
+module internal Seq = 
 
     let internal toOption source =  
         match source |> Seq.truncate 2 |> Seq.toArray with
@@ -29,12 +27,10 @@ module Seq =
         | [| x |] -> Some x
         | _ -> invalidArg "source" "The input sequence contains more than one element."
 
-[<CompilerMessageAttribute("This API supports the FSharp.Data.SqlClient infrastructure and is not intended to be used directly from your code.", 101, IsHidden = true)>]
-type RowMapping = obj[] -> obj
+type internal RowMapping = obj[] -> obj
 
 
-[<CompilerMessageAttribute("This API supports the FSharp.Data.SqlClient infrastructure and is not intended to be used directly from your code.", 101, IsHidden = true)>]
-type DesignTimeConfig = {
+type internal DesignTimeConfig = {
     SqlStatement: string
     IsStoredProcedure: bool 
     Parameters: SqlParameter[]
@@ -47,8 +43,7 @@ type DesignTimeConfig = {
 
 type internal Connection = Choice<string, SqlConnection, SqlTransaction>
 
-[<CompilerMessageAttribute("This API supports the FSharp.Data.SqlClient infrastructure and is not intended to be used directly from your code.", 101, IsHidden = true)>]
-type ``ISqlCommand Implementation``(cfg: DesignTimeConfig, connection: Connection, commandTimeout) = 
+type internal ``ISqlCommand Implementation``(cfg: DesignTimeConfig, connection: Connection, commandTimeout) = 
     let cmd = new SqlCommand(cfg.SqlStatement, CommandTimeout = commandTimeout)
     let manageConnection = 
         match connection with
