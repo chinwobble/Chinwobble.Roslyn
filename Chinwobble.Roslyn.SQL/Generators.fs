@@ -26,15 +26,9 @@ module internal Helpers =
 [<Sealed>]
 [<Conditional("CodeGeneration")>]
 [<CodeGeneration.Roslyn.CodeGenerationAttribute(typeof<SqlGenerator>)>]
-type GenerateSqlAttribute =
-    inherit Attribute
-    val ConnectionString: string
-    val Statement: string
-    new(conn: string, statement: string) =
-        { 
-          ConnectionString = conn
-          Statement = statement
-        }
+type GenerateSqlAttribute(conn: string, statement: string) =
+    inherit Attribute()
+    
 
 and internal SqlGenerator =
     val ConnectionString: string
