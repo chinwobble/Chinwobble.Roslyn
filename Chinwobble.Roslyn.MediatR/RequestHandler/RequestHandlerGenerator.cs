@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,9 +24,7 @@ namespace Chinwobble.Roslyn.MediatR.RequestHandler
 
         IEnumerable<MemberDeclarationSyntax> GenerateRequestHandler(TransformationContext context)
         {
-            // System.Diagnostics.Debugger.Launch();
-
-            if (context.ProcessingNode is ClassDeclarationSyntax classDeclaration && IsMediatorRequest(classDeclaration))
+            if (context.ProcessingNode is ClassDeclarationSyntax classDeclaration && IsMediatorRequest(classDeclaration, out var details))
             {
                 var handlerClassName = classDeclaration.Identifier.ValueText + "Handler_Generated";
                 var typeInfo = context.SemanticModel.GetDeclaredSymbol(classDeclaration);
@@ -37,13 +34,19 @@ namespace Chinwobble.Roslyn.MediatR.RequestHandler
 
                 var fields = walker.HandleMethodParameters.Select(ToFieldSyntax).ToArray();
                 var constructor = GenerateConstructor(handlerClassName, walker.HandleMethodParameters);
-                var handleMethod = GenerateHandleMethod(classDeclaration.Identifier.ValueText, walker.HandleMethodParameters);
-
+                var handleMethod = GenerateHandleMethod(classDeclaration.Identifier.ValueText, walker.HandleMethodParameters, details);
+                var newClassDefinition = SyntaxFactory
+                    .ClassDeclaration(handlerClassName);
                 var requestHandlerType = SyntaxFactory
                     .ClassDeclaration(handlerClassName)
                     .AddMembers(fields)
                     .AddMembers(constructor, handleMethod);
 
+                var tResponse = details.IsGeneric
+                    ? $", {details.ReturnTypeName}"
+                    : "";
+                requestHandlerType = requestHandlerType
+                    .AddBaseListTypes(SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseName($"global::MediatR.IRequestHandler<{classDeclaration.Identifier.ValueText}{tResponse}>")));
                 yield return requestHandlerType;
             }
 
@@ -53,10 +56,16 @@ namespace Chinwobble.Roslyn.MediatR.RequestHandler
 ");
             }
 
-            MemberDeclarationSyntax GenerateHandleMethod(string className, IEnumerable<(string ParamName, string TypeName)> parameters)
+            MemberDeclarationSyntax GenerateHandleMethod(
+                string className,
+                IEnumerable<(string ParamName, string TypeName)> parameters,
+                in MediatorDetails returnTypeDetails)
             {
                 var parametersToForward = string.Join(", ", parameters.Select(x => $"_{x.ParamName}"));
-                return SyntaxFactory.ParseMemberDeclaration($@"public System.Threading.Tasks.Task Handle({className} message, System.Threading.CancellationToken cancellationToken)
+                var returnType = returnTypeDetails.IsGeneric
+                    ? $"<{returnTypeDetails.ReturnTypeName}>"
+                    : "<global::MediatR.Unit>";
+                return SyntaxFactory.ParseMemberDeclaration($@"public System.Threading.Tasks.Task{returnType} Handle({className} message, System.Threading.CancellationToken cancellationToken)
 {{
     return message.Handle({parametersToForward});
 }}
@@ -72,11 +81,45 @@ namespace Chinwobble.Roslyn.MediatR.RequestHandler
 }}");
             }
 
-            bool IsMediatorRequest(ClassDeclarationSyntax classDeclarationSyntax)
+            bool IsMediatorRequest(ClassDeclarationSyntax classDeclarationSyntax, out MediatorDetails mediatorDetails)
             {
-                var MediatRRequestInterfaceType = context.Compilation.GetTypeByMetadataName("MediatR.IBaseRequest");
+                var mediatRGenericRequestType = context.Compilation.GetTypeByMetadataName("MediatR.IRequest`1");
+                var mediatRRequestType = context.Compilation.GetTypeByMetadataName("MediatR.IRequest");
+                var mediatorBaseRequestType = context.Compilation.GetTypeByMetadataName("MediatR.IBaseRequest");
                 var targetType = context.SemanticModel.GetDeclaredSymbol(classDeclarationSyntax);
-                return MediatRRequestInterfaceType.IsAssignableFrom(targetType, false);
+                var isMediatorRequest = mediatorBaseRequestType.IsAssignableFrom(targetType, false);
+                if (isMediatorRequest)
+                {
+                    var baseType = targetType;
+                    while (baseType != null)
+                    {
+                        foreach (var inter in baseType.AllInterfaces)
+                        {
+                            var isRequestWithResponse = inter.OriginalDefinition.Equals(mediatRGenericRequestType);
+
+                            if (isRequestWithResponse)
+                            {
+                                var responseTypeName = inter.TypeArguments[0].ToDisplayString();
+                                mediatorDetails = new MediatorDetails(true, responseTypeName);
+                                return true;
+                            }
+
+                            var isRequestWithoutResponse = inter.OriginalDefinition.Equals(mediatRGenericRequestType);
+
+                            var isRequest = !inter.IsGenericType && inter.Equals(mediatRRequestType);
+                            if (isRequest)
+                            {
+                                mediatorDetails = new MediatorDetails(false, null);
+                                return true;
+                            }
+                        }
+
+                        baseType = baseType.BaseType;
+                    }
+                }
+
+                mediatorDetails = default;
+                return false;
             }
 
             yield break;

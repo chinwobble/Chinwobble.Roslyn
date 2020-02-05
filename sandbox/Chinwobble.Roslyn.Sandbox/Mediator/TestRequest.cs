@@ -10,11 +10,12 @@ using Stream = System.IO.MemoryStream;
 namespace Chinwobble.Roslyn.Sandbox.Mediator
 {
     [Chinwobble.Roslyn.MediatR.GenerateRequestHandler]
-    public class TestRequest : IRequest<string>
+    public class TestRequest : RequestHandler<string>?IRequest
     {
-        public Task Handle(string test, Stream stream)
+        public Task<Unit> Handle(string test, Stream stream)
         {
-            return Task.CompletedTask;
+            global::MediatR.RequestHandler < T >
+            return Task.FromResult(new Unit());
         }
     }
 }
