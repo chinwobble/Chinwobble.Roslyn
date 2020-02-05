@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.PropertyC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.Sandbox", "sandbox\Chinwobble.Roslyn.Sandbox\Chinwobble.Roslyn.Sandbox.csproj", "{3E3AE653-8E19-4E99-AE33-B208947F76FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinwobble.Roslyn.MediatR", "Chinwobble.Roslyn.MediatR\Chinwobble.Roslyn.MediatR.csproj", "{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

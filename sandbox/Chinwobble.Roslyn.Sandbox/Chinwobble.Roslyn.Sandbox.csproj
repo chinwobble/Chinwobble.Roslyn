@@ -11,11 +11,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+
     <DotNetCliToolReference Include="dotnet-codegen" Version="0.6.1" />
 
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Chinwobble.Roslyn.MediatR\Chinwobble.Roslyn.MediatR.csproj" />
     <ProjectReference Include="..\..\Chinwobble.Roslyn.PropertyChanged\Chinwobble.Roslyn.PropertyChanged.csproj" />
   </ItemGroup>
 

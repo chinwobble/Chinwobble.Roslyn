@@ -47,7 +47,7 @@ namespace Chinwobble.Roslyn.PropertyChanged
             MemberDeclarationSyntax CreateIdProperty((string Type, string Name) property)
             {
                 return SyntaxFactory.ParseMemberDeclaration($@"
-public {property.Type} {property.Name} 
+public {property.Type} {property.Name}
 {{
     get 
     {{
