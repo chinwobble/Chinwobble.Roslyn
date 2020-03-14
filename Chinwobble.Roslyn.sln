@@ -3,11 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.PropertyChanged", "Chinwobble.Roslyn.PropertyChanged\Chinwobble.Roslyn.PropertyChanged.csproj", "{80A5530C-14D7-4314-9F83-933861A91694}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{69907D1B-4902-426C-BBBF-A1C429A2B172}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.Sandbox", "sandbox\Chinwobble.Roslyn.Sandbox\Chinwobble.Roslyn.Sandbox.csproj", "{3E3AE653-8E19-4E99-AE33-B208947F76FA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0B5342C4-C1A6-4807-8970-B602461D113E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinwobble.Roslyn.MediatR", "Chinwobble.Roslyn.MediatR\Chinwobble.Roslyn.MediatR.csproj", "{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sandbox", "sandbox", "{837EDB57-033E-451E-B9BC-352961E9D1CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A24B95AD-33ED-431E-8AA6-63EA03BDEFBF}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.Sandbox", "sandbox\Chinwobble.Roslyn.Sandbox\Chinwobble.Roslyn.Sandbox.csproj", "{D6897C35-4C30-4F75-BE1D-732ED94CCC9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.PropertyChanged", "src\Chinwobble.Roslyn.PropertyChanged\Chinwobble.Roslyn.PropertyChanged.csproj", "{31849BDF-6797-4618-A83F-E6EEDBC1E468}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chinwobble.Roslyn.MediatR", "src\Chinwobble.Roslyn.MediatR\Chinwobble.Roslyn.MediatR.csproj", "{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chinwobble.Roslyn.WPF.Sandbox", "sandbox\Chinwobble.Roslyn.WPF.Sandbox\Chinwobble.Roslyn.WPF.Sandbox.csproj", "{9203071F-4F46-47D6-B31A-B90F48F273F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ACBE2F57-74B1-44CE-83F7-AF6B447BED3E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,21 +33,32 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80A5530C-14D7-4314-9F83-933861A91694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80A5530C-14D7-4314-9F83-933861A91694}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80A5530C-14D7-4314-9F83-933861A91694}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80A5530C-14D7-4314-9F83-933861A91694}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E3AE653-8E19-4E99-AE33-B208947F76FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AE9EF91-F98F-4331-8CFD-F799E31ACD21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6897C35-4C30-4F75-BE1D-732ED94CCC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6897C35-4C30-4F75-BE1D-732ED94CCC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6897C35-4C30-4F75-BE1D-732ED94CCC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6897C35-4C30-4F75-BE1D-732ED94CCC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31849BDF-6797-4618-A83F-E6EEDBC1E468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31849BDF-6797-4618-A83F-E6EEDBC1E468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31849BDF-6797-4618-A83F-E6EEDBC1E468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31849BDF-6797-4618-A83F-E6EEDBC1E468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9203071F-4F46-47D6-B31A-B90F48F273F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9203071F-4F46-47D6-B31A-B90F48F273F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9203071F-4F46-47D6-B31A-B90F48F273F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9203071F-4F46-47D6-B31A-B90F48F273F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A24B95AD-33ED-431E-8AA6-63EA03BDEFBF} = {0B5342C4-C1A6-4807-8970-B602461D113E}
+		{D6897C35-4C30-4F75-BE1D-732ED94CCC9F} = {837EDB57-033E-451E-B9BC-352961E9D1CF}
+		{31849BDF-6797-4618-A83F-E6EEDBC1E468} = {69907D1B-4902-426C-BBBF-A1C429A2B172}
+		{AF6D3C5E-8C7F-4786-8E53-7C90A3C2C8D6} = {69907D1B-4902-426C-BBBF-A1C429A2B172}
+		{9203071F-4F46-47D6-B31A-B90F48F273F0} = {837EDB57-033E-451E-B9BC-352961E9D1CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {865361D5-6915-4D9C-8CD7-19266ED11E3A}
